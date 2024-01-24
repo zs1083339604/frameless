@@ -8,7 +8,6 @@ FrameLessWindow::FrameLessWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->titleBar->setStyleSheet("QPushButton{ border:none; }");
     setResizeableAreaWidth(8);
-    setWindowFlags(Qt::FramelessWindowHint);
     setTitleBar(ui->titleBar);
     showMaximize = true;
     changeMaximizeButton();
@@ -156,12 +155,6 @@ void FrameLessWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::WindowStateChange){
         changeMaximizeButton();
-        if (windowState() & Qt::WindowMaximized){
-            // 窗口最大化，我屏幕是1920，走到这里后，titleBar的宽度会变成1936，所以需要-16
-            QTimer::singleShot(50, [=]{
-                ui->titleBar->resize(ui->titleBar->width() - 16, ui->titleBar->height());
-            });
-        }
     }
 
     QWidget::changeEvent(event);
