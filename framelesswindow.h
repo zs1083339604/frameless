@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include "NativeWindowTemplate.hpp"
+#include <windows.h> // Windows API 头文件
 
 class FrameLessWindow: public NativeWindowTemplate<QWidget>
 {
@@ -47,6 +48,10 @@ public:
     void setBackground(QString color);
     // 获取模式
     Model getModel(){return nowModel;};
+    // 调用系统Api实现最大化，以解决标题栏双击和最大化按钮无法混用的BUG
+    void maximizeWithSystemAPI();
+    // 调用系统Api还原窗口
+    void restoreimizeWithSystemAPI();
 
 protected:
     void changeEvent(QEvent *event) override;

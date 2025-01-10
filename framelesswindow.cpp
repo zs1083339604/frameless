@@ -1,5 +1,6 @@
 #include "framelesswindow.h"
 #include <QSpacerItem>
+#include <QMouseEvent>
 
 FrameLessWindow::FrameLessWindow(QWidget *parent)
 {
@@ -217,6 +218,20 @@ void FrameLessWindow::setBackground(QString color)
     titleBar->setStyleSheet("#titleBar{ background-color: " + color + "; } QPushButton{ border:none; }");
 }
 
+void FrameLessWindow::maximizeWithSystemAPI()
+{
+    // 获取原生窗口句柄
+    HWND hwnd = reinterpret_cast<HWND>(winId());
+    // 调用系统的最大化窗口函数
+    ShowWindow(hwnd, SW_MAXIMIZE);
+}
+
+void FrameLessWindow::restoreimizeWithSystemAPI()
+{
+    HWND hwnd = reinterpret_cast<HWND>(winId());
+    ShowWindow(hwnd, SW_RESTORE);
+}
+
 void FrameLessWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::WindowStateChange){
@@ -239,7 +254,7 @@ void FrameLessWindow::closeButtonClicked()
 
 void FrameLessWindow::maximizeClicked()
 {
-    showMaximized();
+    maximizeWithSystemAPI();
 }
 
 void FrameLessWindow::minimizeClicked()
@@ -249,5 +264,5 @@ void FrameLessWindow::minimizeClicked()
 
 void FrameLessWindow::restoreClicked()
 {
-    showNormal();
+    restoreimizeWithSystemAPI();
 }
