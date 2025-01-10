@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/titleBar">
+        <file>icon/Close.png</file>
+        <file>icon/Close_black.png</file>
+        <file>icon/Maximize.png</file>
+        <file>icon/Maximize_black.png</file>
+        <file>icon/Minimize.png</file>
+        <file>icon/Minimize_black.png</file>
+        <file>icon/Restore.png</file>
+        <file>icon/Restore_black.png</file>
+        <file>icon/setting.png</file>
+        <file>icon/setting_blank.png</file>
+    </qresource>
+</RCC>
